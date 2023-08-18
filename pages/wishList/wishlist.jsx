@@ -6,7 +6,7 @@ import { Button, Grid ,TextField , Container} from '@mui/material';
 import Link from "next/link"
 import axios from 'axios';
 import { Triangle } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+//import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useSession , getSession } from "next-auth/react";
 import {getWishlist} from '../../services/userServices'
 import Head from "next/head";
