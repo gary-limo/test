@@ -13,7 +13,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Triangle } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+//import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useSession , getSession } from "next-auth/react";
 import {Context} from "../../context/country";
 import Head from "next/head";
