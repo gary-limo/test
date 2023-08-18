@@ -7,7 +7,7 @@ import {Orders , Navigation , Footer} from '../../components'
 import { Container , Card ,TableContainer ,Table,Paper,TableCell,TableHead,TableRow ,MenuItem,TableBody , Button } from '@mui/material'
 import styles from './profilePage.module.css';
 import { Triangle } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+//import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ToastContainer, toast } from 'react-toastify';
 import {getProfile} from '../../services/userServices'
 import 'react-toastify/dist/ReactToastify.css';
