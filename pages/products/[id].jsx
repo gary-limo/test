@@ -17,7 +17,7 @@ import Link from 'next/link'
 import Router, { useRouter } from 'next/router'
 import axios from 'axios'
 import { Triangle } from 'react-loader-spinner'
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+//import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {
