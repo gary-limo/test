@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Footer, Size, CountryPopup } from '../../components'
 import ProductCard from '../../components/productCard'
+import { Badge } from '@mui/material'
+import { FiShoppingCart } from 'react-icons/fi'
+import { Image } from 'semantic-ui-react';
 import styles from './[id].module.css'
 import {
   Button,
@@ -30,6 +33,8 @@ import { signOut, useSession, signIn } from 'next-auth/react'
 import Head from 'next/head'
 import Cookies from 'js-cookie'
 import NewReleaseProductCorousel from '../../components/NewReleaseProductCorousel' 
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 export default function productDetailsPage({ products, product, index }) {
   const { data: session } = useSession()
@@ -46,6 +51,30 @@ export default function productDetailsPage({ products, product, index }) {
   const [sizeOpen, setSizeOpen] = React.useState(false)
   const [auth, setAuth] = React.useState('')
   const myData = useContext(Context)
+
+  const [cartCount, setCartCount] = useState(0);
+  const isOutOfStock = inventory[size] === 0 || inventory[size] < quantity;
+
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      partialVisibilityGutter: 0,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      partialVisibilityGutter: 0,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      partialVisibilityGutter: 0,
+    },
+  };
+
+   
 
   const handleClose = () => {
     setOpen(false)
@@ -100,6 +129,9 @@ export default function productDetailsPage({ products, product, index }) {
         signIn()
       }
       if (cart) {
+
+        setCartCount(cart.length);
+
         if (value == 1) {
           Router.push('../myCart')
         } else {
@@ -197,54 +229,70 @@ export default function productDetailsPage({ products, product, index }) {
         <title>{product.title} | Distinguished Society</title>
       </Head>
       <ToastContainer />
-      {/* <Navigation/> */}
+    
       <CountryPopup
         open={open}
         handleClose={handleClose}
         setAuth={setAuth}
       ></CountryPopup>
       <Size sizeOpen={sizeOpen} handleSizeClose={handleSizeClose} />
+   
+
 
       <Container>
         <div className={styles.arrivalGrid}>
           <h1 className="heading"> Product Details</h1>
           <p className="breadCrumb">
-            <Link href="/">Home</Link> &#62; Product details
+            <Link href="/">Home</Link> &#62; Product Details
           </p>
         </div>
-        <hr className="insideHr"></hr>
+        <hr className="insideHr">
+     
+        </hr>
         {/* Product Details */}
 
         <div className={styles.mainGrid}>
-          <div className={styles.imgGrid}>
-            <div className='productImage'>
-            <img
-              className={styles.productImage}
-              src={images[selectedImage]}
-            ></img>
-             {
-                 inventory[size] == 0 || inventory[size]<quantity
-                  ?
-                  <p className={styles.stockNotAvailable}>Out of Stock</p>
-                  :<></>
-            }
-            </div>
           
-
-            <div className={styles.imgViewGrid}>
-              {images.map((image, index) => (
-                <img
-                  className={
-                    index == selectedImage
-                      ? styles.productImageThumbSelected
-                      : styles.productImageThumb
-                  }
+          
+          
+          <div className={styles.imgGrid}>
+        
+        
+          
+          <div className={styles.imgViewGrid}>
+   {/* Carousel for image selection */}
+ 
+          <Carousel
+            ssr
+            partialVisbile
+            deviceType="desktop"
+            itemClass="image-item"
+            responsive={responsive}
+          >
+            
+            {images.map((image, index) => (
+              <div key={index}>
+                <Image
+                  draggable={false}
+                  style={{ width: '100%', height: '100%' }}
                   src={image}
                   onClick={() => setSelectedImage(index)}
-                ></img>
-              ))}
-            </div>
-          </div>
+                />
+                {isOutOfStock && (
+                  <p className={styles.stockNotAvailable}>Out of Stock</p>
+                )}
+              </div>
+            ))}
+          </Carousel>
+        
+        
+         
+        {/* End of Carousel */}
+      </div>
+      </div>
+
+
+          
           <div className={styles.contentGrid}>
             <h2 className={styles.productName}>{product.title}</h2>
             <p className={styles.description}>{product.description}</p>
@@ -314,14 +362,15 @@ export default function productDetailsPage({ products, product, index }) {
             {/* <p className={styles.desc}>Description</p>
             <p className="productPrice">{product.description}</p> */}
             <div className={styles.sizeGrid}>
-              <Button
-                style={{width: '50%'}}
-                className="buttonInvert "
-                onClick={() => addToCart(0)}
-                variant="outlined"
-              >
-                Add to Cart
-              </Button>
+            <Button
+  style={{ width: '50%' }}
+  className="buttonInvert"
+  onClick={() => addToCart(0)}
+  variant="outlined"
+>
+ 
+  Add to Cart
+</Button>
               <Button
                style={{width: '50%'}}
                 className="buttonInvert "
