@@ -315,8 +315,7 @@ export default function productDetailsPage({ products, product, index }) {
     <>
       {myData.value.currency}{' '}
       {(product.price * myData.value.currencyRate).toFixed(2)}
-      <br />
-      *Tax included {myData.value.currency}{' '}{((product.price * myData.value.currencyRate) * 0.085).toFixed(2)}
+     
     </>
   ) : (
     product?.price
