@@ -310,13 +310,18 @@ export default function productDetailsPage({ products, product, index }) {
             <></>
           }
           
-            <p className={styles.productPrice}>
-              {typeof window !== 'undefined'
-                ? myData.value.currency +
-                  ' ' +
-                  (product.price * myData.value.currencyRate).toFixed(2)
-                : product?.price}
-            </p>
+                 <p className={styles.productPrice}>
+  {typeof window !== 'undefined' ? (
+    <>
+      {myData.value.currency}{' '}
+      {(product.price * myData.value.currencyRate).toFixed(2)}
+      <br />
+      *Tax included {myData.value.currency}{' '}{((product.price * myData.value.currencyRate) * 0.085).toFixed(2)}
+    </>
+  ) : (
+    product?.price
+  )}
+</p>
             <div className={styles.sizeGrid}>
               <Select
                 onChange={(event) => {
