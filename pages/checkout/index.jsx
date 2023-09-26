@@ -417,7 +417,7 @@ export default function checkout({ cart }) {
                     ).toFixed(2)}
                   </td>
                 </tr>
-                <td className={styles.tableKey}>12% Tax included</td>
+                <td className={styles.tableKey}>(12% Tax included)</td>
               </table>
             </div>
             {activeStep != 0 ? (
